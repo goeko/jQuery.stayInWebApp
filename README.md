@@ -14,6 +14,8 @@ Full links (starting with http) will still open in Safari, as well as links with
 
 UPDATE: Last clicked local link would be saved in persistent localStorage. After restart Standalone Webapp the Webapp change the url to last stored path.
 
+Update: Add Zepto Support
+
 - - - - - - - - - -	
 
 Thanks to [Bryan Murdaugh and David Leininger](http://fivable.com) for the original starting script (mostly for discovering that self.location works).

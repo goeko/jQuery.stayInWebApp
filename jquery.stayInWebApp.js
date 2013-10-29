@@ -16,7 +16,7 @@ $(window).load(function() {
 
 ;(function($) {
 	//extend the jQuery object, adding $.stayInWebApp() as a function
-	$.extend({
+	$.extend($, {
 		stayInWebApp: function(selector) {
 			//detect iOS full screen mode
 			if(("standalone" in window.navigator) && window.navigator.standalone) {
@@ -56,4 +56,4 @@ $(window).load(function() {
 			}
 		} //end stayInWebApp func
 	});
-})( jQuery );
+})( window.jQuery || window.Zepto );
