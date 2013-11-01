@@ -1,15 +1,37 @@
 /*!
  * jQuery stayInWebApp Plugin
  * version: 0.4 (2012-06-19)
- * version: 0.5 (2013-10-29)
+ * version: 0.5.1 (2013-11-01)
  */
-
+var standaloneDebug = false;
+var isStandalone = ( ("standalone" in window.navigator) && window.navigator.standalone || standaloneDebug)?true:false;
 // update last path your exit Standalone Webapp
 $(window).load(function() {
-	if(("standalone" in window.navigator) && window.navigator.standalone && 'url' in window.localStorage) {
+	if(isStandalone && 'url' in window.localStorage) {
 		var url = window.localStorage.getItem('url');
 		if (window.location.pathname!=url) {
+			var loadTime = Math.round(new Date().getTime() / 1000);
+			window.localStorage.setItem('loadTime', loadTime);
 			self.location = url;
+		}
+		if ('loadTime' in window.localStorage) {
+			var loadTime = window.localStorage.getItem('loadTime');
+			$('script').each(function (e,i) {
+				$this = $(this);
+				$src = $this.attr('src');
+				if ($src) {
+					$src = ($src.indexOf('js?'))?$src.split('?')[0]:$src;
+					$this.attr('src', $src+'?'+loadTime);
+				}
+			});
+			$('link[rel="stylesheet"]').each(function (e,i) {
+				$this = $(this);
+				$href = $this.attr('href');
+				if ($href) {
+					$href = ($href.indexOf('css?'))?$href.split('?')[0]:$href;
+					$this.attr('href', $href+'?'+loadTime);
+				}
+			});
 		}
 	}
 });
@@ -19,7 +41,7 @@ $(window).load(function() {
 	$.extend($, {
 		stayInWebApp: function(selector) {
 			//detect iOS full screen mode
-			if(("standalone" in window.navigator) && window.navigator.standalone) {
+			if(isStandalone) {
 				//if the selector is empty, default to all links
 				if(!selector) {
 					selector = 'a';

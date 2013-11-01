@@ -12,9 +12,11 @@ This use only links with the class `stay`.
 	
 Full links (starting with http) will still open in Safari, as well as links with `target="_blank"`.
 
-UPDATE: Last clicked local link would be saved in persistent localStorage. After restart Standalone Webapp the Webapp change the url to last stored path.
-
-Update: Add Zepto Support
+UPDATE:
+* v0.5.0
+** Last clicked local link would be saved in persistent localStorage. After restart Standalone Webapp the Webapp change the url to last stored path.
+** Add Zepto Support
+* v0.5.1 - load javascripts and stylesheets from server, every second if base location would be changed
 
 - - - - - - - - - -	
 
